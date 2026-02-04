@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<title>Study Tracker</title>
+<style>
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    background: transparent;
+  }
+
+  .card {
+    max-width: 420px;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .label {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #CBD5E1;
+    cursor: pointer;
+  }
+
+  .dot.active.blue {
+    background: #2563EB;
+    border-color: #2563EB;
+  }
+
+  .dot.active.green {
+    background: #16A34A;
+    border-color: #16A34A;
+  }
+
+  .note-box {
+    margin-top: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #E5E7EB;
+    font-weight: 700;
+    color: #DC2626;
+    resize: vertical;
+  }
+
+  textarea::placeholder {
+    color: #9CA3AF;
+    font-weight: 500;
+  }
+</style>
+</head>
+
+<body>
+  <div class="card">
+
+    <!-- Thời lượng học -->
+    <div class="row">
+      <div class="label">⏱ Thời lượng học</div>
+      <div class="dots" data-type="blue">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <!-- Mức độ hiểu -->
+    <div class="row">
+      <div class="label">🧠 Mức độ hiểu</div>
+      <div class="dots" data-type="green">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <!-- Ghi chú -->
+    <div class="note-box">
+      <div class="label">📝 Ghi chú phần chưa hiểu</div>
+      <textarea placeholder="Nhập phần bạn chưa hiểu ở đây..."></textarea>
+    </div>
+
+  </div>
+
+<script>
+  document.querySelectorAll(".dots").forEach(group => {
+    const dots = group.querySelectorAll(".dot");
+    const color = group.dataset.type;
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        dots.forEach((d, i) => {
+          d.className = "dot";
+          if (i <= index) d.classList.add("active", color);
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
